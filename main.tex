@@ -4,7 +4,7 @@
 %% IF YOU HAVE FONTS INSTALLED
 %\usepackage{mtpro2}
 %\usepackage{mathtime}
-
+\usepackage{subcaption}
 %\theoremstyle{theorem}
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -81,35 +81,45 @@ The following is the original definition of the Ackermann function.
 If $\varphi(m, z, p)$ converges then where $q>p$ the higher hyperoperators $\varphi(m, z, q)$ converge.
 
 \subsection{Convergence}
-
-$$a^L=L$$
-$$a^{L+dz}=a^L a^{dz}=L\;a^{dz}\approx L(1+\ln{a})=L+L\ln{a}\;{dz}=\ln(L)\;dz$$
+Let $L$ be a fixed point in the exponential map of $a^x$ then $a^L=L$.
 
 $${dz}\to\ln{L}\;{dz}$$
 
+The action of a single iteration near a fixed point.
+
+$$a^{L+dz}=a^L a^{dz}=L\;a^{dz}\approx L(1+\ln{a})=L+L\ln{a}\;{dz}=L+\ln{L}\;dz$$
+
+Location of the fixed points of the roots of unity.
+$$\ln{L}=e^{2 \pi i x}$$
+$$L=e^{e^{2 \pi i x}}$$
+
+Location of the of the base for a given fixed point.
 $$w^{1/w}$$
 
-$$e^{2 i \pi  x}$$
+The boundary of the Shell - Thron region of convergence of the exponential map of $a^z$
+$$e^{2 i \pi  x e^{-2 i \pi  x}}$$
 
-$$\left(e^{2 i \pi  x}\right)^{e^{-2 i \pi  x}}$$
-
-\begin{figure}
+\begin{figure}[htp]
 \centering
-\includegraphics[width=0.5\textwidth]{period.png}
+\includegraphics[width=0.25\textwidth]{period.png}
 \caption{Tetration Period Fractal}
 \label{fig:period}
 \end{figure}
 
-Tetration period fractal
-\begin{figure}
+\begin{figure}[htp]
 \centering
-\includegraphics[]{Ackermann.png}
-\caption{Discrete tetration compared with the tetration flow}
-\label{fig:tetration}
+\includegraphics[width=0.25\textwidth, height=0.4\textwidth]{shell_thron.png}
+\caption{Shell-Thron boundary}
+\label{fig:shell-thron}
 \end{figure}
 
-
-
+Tetration period fractal
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.25\textwidth]{Ackermann.png}
+\caption{Discrete tetration of $\sqrt{2}^z$ compared with the tetration flow $^z(\sqrt{2})$}
+\label{fig:tetration}
+\end{figure}
 
 \section{Mathematica code}
 \begin{verbatim}
