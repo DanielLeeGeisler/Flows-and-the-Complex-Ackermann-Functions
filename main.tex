@@ -35,6 +35,8 @@ The classical Ackermann function along with fractional iteration defines an Acke
 
 Consider the holomorphic function $f(z): \mathbb{C} \rightarrow \mathbb{C}$ and its iterates $f^t(z), t \in \mathbb{N}$ with a fixed point $L\in\mathbb{C}$ such that $f(L)=L$. The derivative of iterated function $D^nf^t(L)$ is $Df^t(L)=f'(L)^t$ and the most important factor in the dynamics of the map.
 
+\section{Recursive Bell Polynomials}
+
 \begin{theorem}[Recursive Bell Polynomial Theorem]
 The derivatives of an iterated holomorphic function with a non-superattracting fixed point can be expressed in terms of recursive Bell polynomials.
 $$D^nf^t(L)=\sum_{r=0}^\infty(\sum_{k=2}^n \frac{f^{(k)}(L)}{k!} B_{n,k}(D^2f^{t-1}(L),\ldots, D^{n-k+1}f^{t-1}(L)))^r$$
@@ -60,15 +62,65 @@ $D^nf^t(x)=C+f'(L)D^nf^{t-1}(x)$.
 By Taylor series $f^t(x)=\sum_{k=0}^\infty\frac{1}{k!} D^nf^t(L) (x - L)^k$
 \end{proof}
 
-While initially $t \in \mathbb{N}$, once a symmetry is added the result is consistent with $t \in \mathbb{C}$.
+\section{Flows}
 
-Mathematica code
+
+
+
+\section{Ackermann Function}
+The following is the original definition of the Ackermann function.
+
+\begin{align}
+\varphi(m, n, 0) &= m + n \\ \nonumber
+\varphi(m, 0, 1) &= 0 \\ \nonumber
+\varphi(m, 0, 2) &= 1 \\ \nonumber
+\varphi(m, 0, p) &= m && \text{for } p > 2 \\ \nonumber
+\varphi(m, n, p) &= \varphi(m, \varphi(m, n-1, p), p - 1) && \text{for } n, p > 0\nonumber
+\end{align}
+
+If $\varphi(m, z, p)$ converges then where $q>p$ the higher hyperoperators $\varphi(m, z, q)$ converge.
+
+\subsection{Convergence}
+
+$$a^L=L$$
+$$a^{L+dz}=a^L a^{dz}=L\;a^{dz}\approx L(1+\ln{a})=L+L\ln{a}\;{dz}=\ln(L)\;dz$$
+
+$${dz}\to\ln{L}\;{dz}$$
+
+$$w^{1/w}$$
+
+$$e^{2 i \pi  x}$$
+
+$$\left(e^{2 i \pi  x}\right)^{e^{-2 i \pi  x}}$$
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{period.png}
+\caption{Tetration Period Fractal}
+\label{fig:period}
+\end{figure}
+
+Tetration period fractal
+\begin{figure}
+\centering
+\includegraphics[]{Ackermann.png}
+\caption{Discrete tetration compared with the tetration flow}
+\label{fig:tetration}
+\end{figure}
+
+
+
+
+\section{Mathematica code}
 \begin{verbatim}
    Flow[f_, t_, x_, L_, order_ : 3] := Module[{s},
    H[0] = L;
    H[1] = f'[L]^t ;
    Do[H[max] = First[r[t] /. 
-      RSolve[{r[0] == 0, r[t] == Sum[Derivative[k][f][L] BellY[max, k,Table[H[j] /. t -> t - 1, {j, max}]], {k, 2, max}] + f'[L] r[t - 1]}, r[t], t]], 
+      RSolve[{r[0] == 0, r[t] ==
+        Sum[Derivative[k][f][L] BellY[max, k,Table[H[j]
+          /. t -> t - 1, {j, max}]], {k, 2, max}] 
+        + f'[L] r[t - 1]}, r[t], t]], 
    {max, 2, order}];
    s = Sum[1/k! H[k] (x - L)^k, {k, 0, order}]
 ];
@@ -79,8 +131,11 @@ The authors wish to thank the Greek polymath Anonymous, whose prolific works are
 \end{acknowledgment}
 
 \begin{thebibliography}{1}
-\bibitem{weisstein} Weisstein, Eric W. "Faà di Bruno's Formula." From \textit{MathWorld}--A Wolfram Web Resource. https://mathworld.wolfram.com/FaadiBrunosFormula.html
+\bibitem{weisstein} Weisstein, Eric W. "Faà di Bruno's Formula." From
 
+\textit{MathWorld}--A Wolfram Web Resource. 
+
+https://mathworld.wolfram.com/FaadiBrunosFormula.html
 \end{thebibliography}
 
 
